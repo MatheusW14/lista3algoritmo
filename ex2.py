@@ -1,20 +1,21 @@
-def numero_par_na_lista():
+def filtrar_numeros_pares():
     """
-    Solicita ao usuário uma sequência de números inteiros separados por espaço,
-    filtra os números pares e retorna uma lista contendo esses números pares.
+    Solicita ao usuário uma lista de números inteiros separados por espaço,
+    filtra os números pares e retorna apenas esses números.
     Returns:
-        list: Uma lista de números inteiros pares.
+        list: Uma lista contendo apenas os números pares.
     """
+    entrada = input("Digite uma lista de números inteiros separados por espaço: ")
 
-    entrada = input("Digite uma sequencia de numeros inteiros separados por espaço: ")
+    # Converte a entrada para uma lista de inteiros
+    lista = list(map(int, entrada.split()))
 
-    pares = list(filter(lambda x: x % 2 == 0, map(int, entrada.split())))
-    # map(int, entrada.split()): Converte os números da entrada (string) em inteiros.
-    # # filter(lambda x: x % 2 == 0, ...): Filtra apenas os números pares.
+    # Filtra os números pares
+    numeros_pares = list(filter(lambda x: x % 2 == 0, lista))
 
-    return pares
+    return numeros_pares
 
 
-pares = numero_par_na_lista()
-
-print(f"Os números pares na lista são: {pares}")
+# Exemplo de uso
+pares = filtrar_numeros_pares()
+print(f"Números pares na lista digitada: {pares}")

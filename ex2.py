@@ -8,12 +8,13 @@ def numero_par_na_lista():
 
     entrada = input("Digite uma sequencia de numeros inteiros separados por espaço: ")
 
-    numeros_pares = list(
-        filter(lambda x: x % 2 == 0, map(int, entrada.split()))
-    )  # map(int, entrada.split()): Converte os números da entrada (string) em inteiros. filter(lambda x: x % 2 == 0, ...): Filtra apenas os números pares.
+    pares = list(filter(lambda x: x % 2 == 0, map(int, entrada.split())))
+    # map(int, entrada.split()): Converte os números da entrada (string) em inteiros.
+    # # filter(lambda x: x % 2 == 0, ...): Filtra apenas os números pares.
 
-    return numeros_pares
+    return pares
 
 
-numeros_pares = numero_par_na_lista()
-print("Os números pares na lista são:", numeros_pares)
+pares = numero_par_na_lista()
+
+print(f"Os números pares na lista são: {pares}")

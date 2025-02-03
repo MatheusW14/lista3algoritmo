@@ -14,9 +14,9 @@ def contar_letras():
 
     nomes_lista = [nome.strip() for nome in entrada.split(",")]
 
-    soma_letras = reduce(lambda x, y: x + y, map(len, nomes_lista))
+    total_letras = reduce(lambda x, y: x + y, map(len, nomes_lista))
 
-    return soma_letras
+    return total_letras
 
 
 soma_letras = contar_letras()

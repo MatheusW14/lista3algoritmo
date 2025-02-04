@@ -11,20 +11,55 @@ def calcular_media_ponderada(dicionario):
     Returns:
         dict: Novo dicionário com os alunos e suas médias ponderadas.
     """
-    medias = {}
+    return dict(
+        map(
+            lambda item: (
+                item[0],  # Nome do aluno
+                round(
+                    reduce(lambda acc, nota: acc + nota * item[1][-1], item[1][:-1], 0)
+                    / (len(item[1]) - 1)
+                    / item[1][-1],
+                    1,
+                ),
+            ),
+            dicionario.items(),
+        )
+    )
 
-    for aluno, valores in dicionario.items():
-        notas, peso = valores[:-1], valores[-1]  # Separa notas e peso
 
-        soma_ponderada = reduce(
-            lambda acc, nota: acc + nota * peso, notas, 0
-        )  # Soma das notas ponderadas, acc (acumulador): Mantém a soma acumulada. Começa em 0 (valor inicial).
-        media = soma_ponderada / (len(notas) * peso)  # Média ponderada
+# Função para capturar entrada do usuário
+def obter_dados():
+    """
+    Solicita ao usuário a entrada de dados no formato de alunos e suas notas,
+    e retorna um dicionário com os nomes dos alunos como chaves e uma lista de
+    suas notas como valores.
 
-        medias[aluno] = round(media, 1)  # Armazena com 1 casa decimal
+    A entrada deve ser no formato:
+    "nome:nota1,nota2,...,peso;nome2:nota1,nota2,...,peso2;..."
 
-    return medias
+    Returns:
+        dict: Um dicionário onde as chaves são os nomes dos alunos (str) e os
+        valores são listas de inteiros representando as notas dos alunos.
+    """
+    dicionario = dict(
+        map(
+            lambda entrada: (entrada[0], list(map(float, entrada[1].split(",")))),
+            map(
+                lambda x: x.split(":"),
+                input(
+                    "Digite os alunos e suas notas (nome:nota1,nota2,...,peso) separados por ponto e vírgula: "
+                ).split(";"),
+            ),
+        )
+    )
+    return dicionario
 
 
-medias = calcular_media_ponderada()
+dados_alunos = obter_dados()
+
+
+medias = calcular_media_ponderada(dados_alunos)
+
+
+print("\nMédias ponderadas:")
 print(medias)
